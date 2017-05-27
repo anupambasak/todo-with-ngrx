@@ -1,4 +1,8 @@
-# TodoWithNgrx
+# Todo With Ngrx
+
+This implementation helps in understaing the concept of Redux using ngrx/store. How meta-reducers are used and selectors usage
+
+It also shows the interaction of parent and child components. The data flow between them using Observables.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
