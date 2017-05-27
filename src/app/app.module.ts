@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { AddtodosComponent } from './addtodos/addtodos.component';
@@ -23,7 +24,8 @@ import { reducer } from './reducers/rootruducer';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    StoreModule.provideStore(reducer)
+    StoreModule.provideStore(reducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [],
   bootstrap: [AppComponent]
