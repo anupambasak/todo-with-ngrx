@@ -1,3 +1,12 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <app-addtodos (addToDoEventRequest)="addToDoRequest($event)"></app-addtodos>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <app-listtodos [todos]="this.todos$ | async" (deleteToDoEventRequest)="deleteToDoRequest($event)"></app-listtodos>
+    </div>
+  </div>
+</div>

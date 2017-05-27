@@ -1,0 +1,7 @@
+<h1>ToDos</h1>
+<form [formGroup]='todoForm' (ngSubmit)='addToDo()'>
+  <div class="form-group">
+    <input type="text" placeholder="Enter ToDo" [formControl]="todoInput">
+    <button type="submit">Submit</button>
+  </div>
+</form>
