@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable} from 'rxjs/Rx';
 import { AddtodosComponent } from './addtodos/addtodos.component';
 import { Todo } from './models/todo';
-import { AddTodoAction, DeleteTodoAction } from './actions/todoaction';
+import { AddTodoAction, DeleteTodoAction, CompleteTodoAction } from './actions/todoaction';
 import * as fromTodo from './reducers/todoreducer';
 import * as fromRoot from './reducers/rootruducer';
 
@@ -26,6 +26,10 @@ export class AppComponent {
 
   deleteToDoRequest(val: Todo) {
     this.store.dispatch(new DeleteTodoAction(val));
+  }
+
+  completeToDoRequest (val: Todo) {
+    this.store.dispatch(new CompleteTodoAction(val));
   }
 
 }

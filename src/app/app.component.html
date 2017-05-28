@@ -6,7 +6,9 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <app-listtodos [todos]="this.todos$ | async" (deleteToDoEventRequest)="deleteToDoRequest($event)"></app-listtodos>
+      <app-listtodos [todos]="this.todos$ | async"
+      (deleteToDoEventRequest)="deleteToDoRequest($event)"
+       (completeToDoEventRequest)="completeToDoRequest($event)"></app-listtodos>
     </div>
   </div>
 </div>

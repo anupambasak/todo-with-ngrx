@@ -29,6 +29,7 @@ export class AddtodosComponent implements OnInit {
     const todo = new Todo();
     todo.description = this.todoInput.value;
     todo.completed = false;
+    this.todoInput.reset();
     this.addToDoEventRequest.emit(todo);
   }
 

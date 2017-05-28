@@ -1,21 +1,23 @@
 <div *ngIf="todos.length > 0">
-<h4>List ToDos</h4>
-  <table class="table table-striped table-responsive">
-    <thead>
-      <th>Serial No.</th>
-      <th>Description</th>
-      <th>Sequence</th>
-      <th>Completed</th>
-      <th></th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let todo of todos; let i = index">
-        <td>{{i + 1}}</td>
-        <td>{{todo.id}}</td>
-        <td>{{todo.description}}</td>
-        <td><input type="checkbox" [(value)]="todo.completed"></td>
-        <td><button class="btn btn-info" (click)="deleteToDo(todo)">Delete</button></td>
-      </tr>
-    </tbody>
-  </table>
+  <h4>List ToDos</h4>
+  <form>
+    <table class="table table-striped table-responsive">
+      <thead>
+        <th>Serial No.</th>
+        <th>Description</th>
+        <th>Sequence</th>
+        <th>Completed</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let todo of todos; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{todo.description}}</td>
+          <td>{{todo.id}}</td>
+          <td><input type="checkbox" #com [checked]="todo.completed" (change)="completeToDo(com.checked, todo)"></td>
+          <td><button class="btn btn-info" (click)="deleteToDo(todo)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
 </div>

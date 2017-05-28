@@ -26,6 +26,17 @@ export function reducer( state = initialState, action: todo.Action): State {
         todos: state.todos.filter(d => d.id !== payLoadTodo.id)
       });
     }
+    case todo.COMPLETE_TODO: {
+      const payLoadTodo: Todo = action.payLoad;
+      return Object.assign({}, {
+        todos: state.todos.map( t => {
+          if (t.id !== payLoadTodo.id) {
+            return t;
+          }
+          return payLoadTodo;
+        })
+      });
+    }
     default: {
       return state;
     }
