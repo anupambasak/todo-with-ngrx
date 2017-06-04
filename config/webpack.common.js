@@ -3,11 +3,13 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
 
+const ENVFILE = process.env.NODE_ENV == 'production' ? './src/environments/environment.prod.ts' : './src/environments/environment.ts';
+
 module.exports = {
   entry: {
     'polyfills': './src/polyfills.ts',
     'vendor': './src/vendor.ts',
-    'app': './src/main.ts'
+    'app': './src/main.ts',
   },
 
   resolve: {
@@ -22,7 +24,7 @@ module.exports = {
           {
             loader: 'awesome-typescript-loader',
             options: { configFileName: helpers.root('src', 'tsconfig.json') }
-          } , 'angular2-template-loader'
+          }, 'angular2-template-loader'
         ]
       },
       {
@@ -47,18 +49,22 @@ module.exports = {
   },
 
   plugins: [
-    // Workaround for angular/angular#11580
     new webpack.ContextReplacementPlugin(
-      // The (\\|\/) piece accounts for path separators in *nix and Windows
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-      helpers.root('./src'), // location of your src
-      {} // a map of your routes
+      /angular(\\|\/)core(\\|\/)@angular/,
+      helpers.root('./src')
     ),
-
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['app', 'vendor', 'polyfills']
+      name: ['app', 'vendor', 'polyfills'],
+      // minChunks: function (module) {
+      //   // this assumes your vendor imports exist in the node_modules directory
+      //   return module.context && module.context.indexOf('node_modules') !== -1;
+      // }
     }),
-
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   //But since there are no more common modules between them we end
+    //   // up with just the runtime code included in the manifest file
+    //   name: 'manifest'
+    // }),
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     })

@@ -14,4 +14,4 @@ import '@ngrx/store-devtools';
 import 'rxjs/Rx';
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
