@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable} from 'rxjs/Rx';
+import { Store, select } from '@ngrx/store';
+import { Observable} from 'rxjs';
 import { AddtodosComponent } from './addtodos/addtodos.component';
 import { Todo } from './models/todo';
 import { AddTodoAction, DeleteTodoAction, CompleteTodoAction } from './actions/todoaction';
-import * as fromTodo from './reducers/todoreducer';
 import * as fromRoot from './reducers/rootruducer';
 
 @Component({
@@ -17,7 +16,7 @@ export class AppComponent {
   todos$: Observable<Todo[]>;
 
   constructor(private store: Store<fromRoot.State>) {
-    this.todos$  = store.select(fromRoot.getToDos);
+    this.todos$  = store.pipe(select(fromRoot.getToDos));
   }
 
   addToDoRequest(val: Todo) {

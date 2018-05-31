@@ -1,7 +1,6 @@
-import { createSelector } from 'reselect';
-import { ActionReducer } from '@ngrx/store';
+import { ActionReducer, ActionReducerMap,
+  createSelector, MetaReducer } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import { compose } from '@ngrx/core/compose';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { combineReducers } from '@ngrx/store';
 
@@ -11,20 +10,22 @@ export interface State {
   todo: fromToDo.State;
 }
 
-const reducers = {
+export const reducers: ActionReducerMap<State>  = {
   todo: fromToDo.reducer
 };
 
-const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
-const productionReducer: ActionReducer<State> = combineReducers(reducers);
-
-export function reducer(state: any, action: any) {
-  if (environment.production) {
-    return productionReducer(state, action);
-  } else {
-    return developmentReducer(state, action);
-  }
+// console.log all actions
+export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
+  return function(state: State, action: any): State {
+    console.log('state', state);
+    console.log('action', action);
+    return reducer(state, action);
+  };
 }
+
+export const metaReducers: MetaReducer<State>[] = !environment.production
+  ? [logger, storeFreeze]
+  : [];
 
 export const getToDoState = (state: State) => state.todo;
 
